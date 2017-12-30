@@ -1,13 +1,13 @@
 #!/bin/sh
 sudo su
-yum -y install httpd
-yum -y install php php-mysql
+sudo yum -y install httpd
 service httpd start
 chkconfig --level 3 httpd on
 #mysql 
 sudo yum -y remove mysql55\*
 yum -y remove MySQL\*
 sudo yum -y install mysql56-server
+sudo yum -y install php php-mysql
 service mysqld start
 chkconfig --level 3 mysqld on
 mysqladmin -uroot create wordpress
