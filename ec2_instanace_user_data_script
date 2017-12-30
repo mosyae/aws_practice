@@ -1,0 +1,19 @@
+#!/bin/sh
+sudo su
+yum -y install httpd
+yum -y install php php-mysql
+service httpd start
+chkconfig --level 3 httpd on
+yum -y install mysql-server
+service mysqld start
+chkconfig --level 3 mysqld on
+mysqladmin -uroot create wordpress
+cd /var/www/html
+wget http://wordpress.org/latest.tar.gz
+tar -xzvf latest.tar.gz
+cd /var/www/html/wordpress
+mv wp-config-sample.php wp-config.php
+sed -i 's/database_name_here/wordpress/g' /var/www/html/wordpress/wp-config.php
+sed -i 's/username_here/root/g' /var/www/html/wordpress/wp-config.php
+sed -i 's/password_here//g' /var/www/html/wordpress/wp-config.php
+service httpd restart
