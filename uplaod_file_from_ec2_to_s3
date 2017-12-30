@@ -1,0 +1,25 @@
+1. create Role with policy to access spesific bucket with need permisunis.
+
+2. Attach this Role to the EC2 instance - you will need to stop/start the instance so it will get the role
+3. then run from cli of the instance (ec2-user)
+aws s3 cp uploaded_from_ec2_to_s3.txt s3://webserver-bucket-2017-12-30/uploaded_from_ec2_to_s3.txt
+
+https://www.slideshare.net/devopsjourney/mount-aws-s3-bucket-to-ec2-with-iam-role
+
+#Steps to mount s3 to ec2
+
+yum update all
+sudo yum install automake fuse fuse-devel gcc-c++ git libcurl-devel libxml2-devel make openssl-devel
+git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+cd s3fs-fuse
+./autogen.sh
+./configure --prefix=/usr --with-openssl
+make
+sudo make install
+
+# check that it is works
+which s3fs
+mkdir s3-webserver-bucket
+
+
+
