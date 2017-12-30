@@ -3,6 +3,7 @@
 2. Attach this Role to the EC2 instance - you will need to stop/start the instance so it will get the role
 3. then run from cli of the instance (ec2-user)
 aws s3 cp uploaded_from_ec2_to_s3.txt s3://webserver-bucket-2017-12-30/uploaded_from_ec2_to_s3.txt
+Command from https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonS3.html
 
 https://www.slideshare.net/devopsjourney/mount-aws-s3-bucket-to-ec2-with-iam-role
 
