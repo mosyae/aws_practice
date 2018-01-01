@@ -3,3 +3,30 @@ yum -y install percona-xtrabackup-24
 sudo su
 innobackupex --user=root --password='' --no-timestamp mysql_backup
 aws s3 cp mysql_backup s3://webserver-bucket-2017-12-30/mysql_backup --recursive
+mysql-db-extport-from-webserver-2018-01-01
+aws s3 cp mysql_backup s3://mysql-db-extport-from-webserver-2018-01-01 --recursive
+Create Policy to access accecss to S3 from RDS
+Instructions are here: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
+RDS database settings
+Insatnce name: wordpress
+Master username: dbadmin
+Master passwrod: JSdjskh3743jdH632
+
+VPC: vpc-522be83a
+
+DB name: wordpress
+
+pip install awscli --upgrade --user
+
+Configure asw cli with "aws confugre" provide access key and ID
+
+aws rds restore-db-instance-from-s3 \
+--db-instance-identifier wordpress \
+--db-instance-class db.t2.small \
+--engine mysql \
+--s3-bucket-name mysql-db-extport-from-webserver-2018-01-01 \
+--s3-ingestion-role-arn arn:aws:iam::312092062548:role/service-role/Access_S3_from_RDS_for_import \
+--source-engine mysql \
+--source-engine-version 5.6.38
+
+**** MySQL must be 5.6.37!!!!
