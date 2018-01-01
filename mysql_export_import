@@ -1,3 +1,5 @@
 yum -y install http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm
 yum -y install percona-xtrabackup-24
+sudo su
 innobackupex --user=root --password='' --no-timestamp mysql_backup
+aws s3 cp mysql_backup s3://webserver-bucket-2017-12-30/mysql_backup --recursive
