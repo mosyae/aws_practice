@@ -1,0 +1,7 @@
+First you will need to create an image from your Workpress machine
+To create an image highlight the ec2 instance to go Image and press create image. It will take several minutes to create an image
+Now you can create ec2 instanace usign thsi image
+Be sure to assign this instance to another AZ (in Advansed settings)
+Now when incatnace is started create a Applicaiton Load balaning with inctances: Web server 1 and Web server 2.
+Put test.html on each server so you can see on which server you are
+The DNS will be created for the loadbalancer - you can access your HA Web servers now with this DNS name.
