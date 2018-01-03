@@ -6,7 +6,8 @@ aws s3 cp mysql_backup s3://webserver-bucket-2017-12-30/mysql_backup --recursive
 mysql-db-extport-from-webserver-2018-01-01
 aws s3 cp mysql_backup s3://mysql-db-extport-from-webserver-2018-01-01 --recursive
 Create Policy to access accecss to S3 from RDS
-Instructions are here: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
+# NOT WORKING Instructions are here: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
+Using these instructions: https://docs.bitnami.com/aws/how-to/migrate-database-rds/
 RDS database settings
 Insatnce name: wordpress
 Master username: dbadmin
@@ -15,6 +16,15 @@ Master passwrod: JSdjskh3743jdH632
 VPC: vpc-522be83a
 
 DB name: wordpress
+Endpoint
+wordpress.csjnlyah3xzu.us-east-2.rds.amazonaws.com
+
+Add to Inboand securtity rules IP addresses of two App server on MySQL port
+
+Export MySQL  mysqldump wordpress -u root > backup.sql
+Improt MySQL
+ mysql -u dbadmin -p -h wordpress.csjnlyah3xzu.us-east-2.rds.amazonaws.com -D wordpress < backup.sql
+
 
 pip install awscli --upgrade --user
 
@@ -30,3 +40,4 @@ aws rds restore-db-instance-from-s3 \
 --source-engine-version 5.6.38
 
 **** MySQL must be 5.6.37!!!!
+
